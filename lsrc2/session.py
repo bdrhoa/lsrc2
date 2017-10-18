@@ -259,6 +259,11 @@ class Session(object):
             responses = []
 
         return responses, error
+    
+    def copy_survey(self, originalSurveyID, newSurveyName):
+        request = self._request('copy_survey',
+                                [self.key,originalSurveyID, newSurveyName ])
+        return self._post(request)
 
 
 def session():

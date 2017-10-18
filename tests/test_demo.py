@@ -33,7 +33,8 @@ import lsrc2
 LS_DEMO_URL = 'https://lsdemo.limequery.com/admin/remotecontrol'
 LS_DEMO_USERNAME = 'limedemo'
 LS_DEMO_PASSWORD = 'demo'
-
+LS_DEMO_BASESURVEY_ID = 273743
+LS_DEMO_NEW_SURVEY_NAME = "Copy of Base Survey"
 
 def test1(base_url, username, password):
     with lsrc2.Session(base_url, username, password) as session:
@@ -53,10 +54,21 @@ def test2(base_url, username, password):
         sid = survey['sid']
         print(u'▶ {} ▶ {}'.format(sid, title))
     session.close()
+    
+def test3(base_url, username, password,originalSurveyID,newSurveyName):
+    session = lsrc2.Session(base_url, username, password)
+    
+    newSurveyID = session.copy_survey(originalSurveyID, newSurveyName)
+    #print('New Survey ID: {}'.find(newSurveyID))
+    print(newSurveyID)
+    session.close()
+    
 
 
 def main():
     test1(LS_DEMO_URL, LS_DEMO_USERNAME, LS_DEMO_PASSWORD)
+    test2(LS_DEMO_URL, LS_DEMO_USERNAME, LS_DEMO_PASSWORD)
+    test3(LS_DEMO_URL, LS_DEMO_USERNAME, LS_DEMO_PASSWORD, LS_DEMO_BASESURVEY_ID, LS_DEMO_NEW_SURVEY_NAME)
     test2(LS_DEMO_URL, LS_DEMO_USERNAME, LS_DEMO_PASSWORD)
 
 
