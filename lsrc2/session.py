@@ -263,8 +263,14 @@ class Session(object):
     def copy_survey(self, originalSurveyID, newSurveyName):
         request = self._request('copy_survey',
                                 [self.key,originalSurveyID, newSurveyName ])
-        return self._post(request)
+        new_survey =  self._post(request)
+        return new_survey[0]['newsid']
 
+    def activate_survey(self, surveyToActivate):
+        request = self._request('activate_survey',
+                                [self.key,surveyToActivate ])
+        return self._post(request)
+        
 
 def session():
     """
